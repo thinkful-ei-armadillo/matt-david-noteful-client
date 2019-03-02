@@ -18,7 +18,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log(config.API_TOKEN)
     const options = {
       method: 'GET',
       headers: {
