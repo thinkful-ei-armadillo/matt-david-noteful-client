@@ -26,14 +26,14 @@ class App extends Component {
       }
     }
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes/`, options),
-      fetch(`${config.API_ENDPOINT}/folders/`, options)
+      fetch(`${config.API_ENDPOINT}/api/notes/`, options),
+      fetch(`${config.API_ENDPOINT}/api/folders/`, options)
     ])
       .then(([notesRes, foldersRes]) => {
         if (!notesRes.ok)
-          return notesRes.json().then(e => Promise.reject(e))
+          throw new Error(notesRes.message)
         if (!foldersRes.ok)
-          return foldersRes.json().then(e => Promise.reject(e))
+          throw new Error(foldersRes.message)
 
         return Promise.all([
           notesRes.json(),
@@ -44,7 +44,7 @@ class App extends Component {
         this.setState({ notes, folders })
       })
       .catch(error => {
-        console.error({ error })
+        console.error( error.message )
       })
   }
 
