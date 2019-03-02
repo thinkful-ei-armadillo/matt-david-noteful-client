@@ -28,7 +28,6 @@ export default class Note extends React.Component {
         {
           return Promise.reject(e)}
           else {
-          console.log('OK')
           this.context.deleteNote(noteId)
           // allow parent to perform extra behaviour
           this.props.onDeleteNote(noteId)   
